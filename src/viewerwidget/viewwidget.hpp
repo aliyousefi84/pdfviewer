@@ -1,0 +1,6 @@
+#ifndef VIEWERWIDGET_HPP
+#define VIEWERWIDGET_HPP
+
+
+
+#endif
