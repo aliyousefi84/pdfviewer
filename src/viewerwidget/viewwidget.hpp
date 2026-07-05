@@ -12,19 +12,16 @@
 #include <QStackedWidget>
 #include <QVBoxLayout>
 #include <QLabel>
-#include <poppler/cpp/poppler-document.h>
-#include <poppler/cpp/poppler-page.h>
-#include <poppler/cpp/poppler-page-renderer.h>
-#include <poppler/cpp/poppler-image.h>
+#include <poppler/qt6/poppler-qt6.h>
 #include <iostream>
 
 using namespace std;
-using namespace poppler;
+using namespace Poppler;
 
 class ViewerWidget : public QMainWindow {
     Q_OBJECT
     public:
-        ViewerWidget (QMainWindow* parent = nullptr , string filepath);
+        ViewerWidget (QMainWindow* parent, QString filepath);
     
     private:
 
@@ -56,21 +53,17 @@ class ViewerWidget : public QMainWindow {
 
         QPixmap pixmap;
 
-        QImage* image;
+        QImage image;
 
         QLabel* label;
 
         QListWidgetItem* item;
 
-        document* doc;
+        std::unique_ptr<Document> doc;
         
-        page* page_of_pdf;
-
-        poppler::image img;
-
-        page_renderer render;
+        std::unique_ptr<Poppler::Page> page_of_pdf;
         
-        string filepath;
+        QString filepath;
 };
 
 #endif

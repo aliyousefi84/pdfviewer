@@ -3,7 +3,7 @@
 MainWindow::MainWindow (QWidget* parent) : QWidget (parent) {
     this->setWindowTitle ("pdf viewer");
     init_window_button ();
-
+    handle_open_button_click();
 };
 
 
@@ -25,7 +25,8 @@ void MainWindow::init_window_button () {
 
 
 void MainWindow::init_viewer_widget () {
-    viewer_widget = new ViewerWidget (NULL , path_of_pdf_file->text().toStdString());    
+    viewer_widget = new ViewerWidget (NULL , path_of_pdf_file->text());
+    viewer_widget->show();    
 };
 
 
