@@ -12,6 +12,8 @@
 #include <QStackedWidget>
 #include <QVBoxLayout>
 #include <QLabel>
+#include <QGraphicsScene>
+#include <QGraphicsView>
 #include <poppler/qt6/poppler-qt6.h>
 #include <iostream>
 
@@ -33,7 +35,9 @@ class ViewerWidget : public QMainWindow {
 
         void setup_centralwidget_layout ();
 
-        void setup_pdf_reader ();
+        void set_graphic_view ();
+        
+
         
         QMenuBar* menu_bar;
 
@@ -58,6 +62,10 @@ class ViewerWidget : public QMainWindow {
         QLabel* label;
 
         QListWidgetItem* item;
+
+        QGraphicsScene* scene;
+
+        QGraphicsView* view;
 
         std::unique_ptr<Document> doc;
         

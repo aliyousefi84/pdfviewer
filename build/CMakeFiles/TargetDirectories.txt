@@ -1,5 +1,0 @@
-/home/ali-pc/my_own_project/pdfviewer/build/CMakeFiles/pdfviewer.dir
-/home/ali-pc/my_own_project/pdfviewer/build/CMakeFiles/edit_cache.dir
-/home/ali-pc/my_own_project/pdfviewer/build/CMakeFiles/rebuild_cache.dir
-/home/ali-pc/my_own_project/pdfviewer/build/CMakeFiles/pdfviewer_autogen_timestamp_deps.dir
-/home/ali-pc/my_own_project/pdfviewer/build/CMakeFiles/pdfviewer_autogen.dir

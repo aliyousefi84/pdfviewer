@@ -3,7 +3,7 @@
 ViewerWidget::ViewerWidget (QMainWindow* parent , QString filepath) : QMainWindow(parent) {
     this->filepath = filepath;
     setWindowTitle ("pdf viewer");
-    resize (1000,800);
+    resize (1000,1200);
 
     create_menubar ();
     init_view_widget ();
@@ -33,17 +33,14 @@ void ViewerWidget::create_menubar () {
 
 void ViewerWidget::init_list_widget () {
     list_widget = new QListWidget (this);
-    list_widget->setViewMode (QListView::IconMode);
+    list_widget->setMaximumWidth (200);
+    list_widget->setViewMode (QListView::ListMode);
     
     for (int i = 0;i < doc->numPages();i++) {
         item = new QListWidgetItem;
         item->setText ("page");
         item->setIcon (QIcon("/home/ali-pc/my_own_project/pdfviewer/src/png/folder.png"));
         
-        list_widget->setViewMode (QListView::IconMode);
-        list_widget->setGridSize (QSize(100,120));
-        list_widget->setIconSize (QSize(64,64));
-        list_widget->setSpacing (10);
         list_widget->setDragEnabled (false);
         list_widget->setAcceptDrops (false);
         list_widget->addItem (item);
@@ -54,40 +51,36 @@ void ViewerWidget::init_list_widget () {
 
 
 
-
-
-void ViewerWidget::setup_pdf_reader () {
+void ViewerWidget::set_graphic_view () {
+    scene = new QGraphicsScene;
+    scene->addPixmap (pixmap);
+        
+    view = new QGraphicsView;
+    view->setScene (scene);
+    view->setRenderHint (QPainter::Antialiasing);
+    view->setRenderHint (QPainter::SmoothPixmapTransform);
+    view->setDragMode (QGraphicsView::ScrollHandDrag);    
     
 };
 
 
-
-
-
 void ViewerWidget::init_view_widget () {
-    view_widget = new QWidget (this);
+    
     doc = Document::load(filepath);
     if (doc == NULL)
     {
         cout << "document is NULL !" << endl;
         exit(1);
     }
+    //for (int i = 0; i < doc->numPages(); i++)
     
-
-    for (int i = 0; i < doc->numPages(); i++)
-    {
-        page_of_pdf = doc->page(i);
-        
-
-        image = page_of_pdf->renderToImage(300,300,-1,-1,-1,-1);
+        page_of_pdf = doc->page(0);
+    
+        image = page_of_pdf->renderToImage(100,100,-1,-1,-1,-1);
 
         pixmap = QPixmap::fromImage (image);
 
-        label = new QLabel (view_widget);
-        label->setPixmap (pixmap.scaled (view_widget->size() , Qt::KeepAspectRatio));
-        
-    }
-    
+        set_graphic_view ();
 };
 
 
@@ -99,6 +92,6 @@ void ViewerWidget::setup_centralwidget_layout () {
     this->setCentralWidget (main_splitter);
 
     main_splitter->addWidget (list_widget);
-    main_splitter->addWidget (view_widget);
+    main_splitter->addWidget (view);
 
 };
