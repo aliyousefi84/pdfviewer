@@ -25,7 +25,7 @@ void MainWindow::init_window_button () {
 
 
 void MainWindow::init_viewer_widget () {
-    
+    viewer_widget = new ViewerWidget (NULL , path_of_pdf_file->text().toStdString());    
 };
 
 

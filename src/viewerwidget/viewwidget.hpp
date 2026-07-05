@@ -11,11 +11,20 @@
 #include <QImage>
 #include <QStackedWidget>
 #include <QVBoxLayout>
+#include <QLabel>
+#include <poppler/cpp/poppler-document.h>
+#include <poppler/cpp/poppler-page.h>
+#include <poppler/cpp/poppler-page-renderer.h>
+#include <poppler/cpp/poppler-image.h>
+#include <iostream>
+
+using namespace std;
+using namespace poppler;
 
 class ViewerWidget : public QMainWindow {
     Q_OBJECT
     public:
-        ViewerWidget (QMainWindow* parent = nullptr);
+        ViewerWidget (QMainWindow* parent = nullptr , string filepath);
     
     private:
 
@@ -27,6 +36,8 @@ class ViewerWidget : public QMainWindow {
 
         void setup_centralwidget_layout ();
 
+        void setup_pdf_reader ();
+        
         QMenuBar* menu_bar;
 
         QMenu* file_menu;
@@ -42,7 +53,24 @@ class ViewerWidget : public QMainWindow {
         QWidget* view_widget;
 
         QListWidget* list_widget;
+
+        QPixmap pixmap;
+
+        QImage* image;
+
+        QLabel* label;
+
+        QListWidgetItem* item;
+
+        document* doc;
         
+        page* page_of_pdf;
+
+        poppler::image img;
+
+        page_renderer render;
+        
+        string filepath;
 };
 
 #endif

@@ -4,6 +4,9 @@
 #include <QPushButton>
 #include <QLineEdit>
 #include <QGridLayout>
+#include "../viewerwidget/viewwidget.hpp"
+
+
 
 class MainWindow : public QWidget {
     Q_OBJECT
@@ -24,6 +27,8 @@ class MainWindow : public QWidget {
         QLineEdit* path_of_pdf_file;
 
         QGridLayout* Glayout;
+
+        ViewerWidget* viewer_widget;
 };
 
 #endif
