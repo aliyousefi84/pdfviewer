@@ -16,6 +16,9 @@
 #include <QGraphicsView>
 #include <poppler/qt6/poppler-qt6.h>
 #include <iostream>
+#include <stdlib.h>
+#include <stdio.h>
+
 
 using namespace std;
 using namespace Poppler;
@@ -24,10 +27,11 @@ class ViewerWidget : public QMainWindow {
     Q_OBJECT
     public:
         ViewerWidget (QMainWindow* parent, QString filepath);
+        ~ViewerWidget ();
     
     private:
 
-        void create_menubar ();
+        
 
         void init_list_widget ();
 
@@ -35,43 +39,57 @@ class ViewerWidget : public QMainWindow {
 
         void setup_centralwidget_layout ();
 
-        void set_graphic_view ();
+        void set_graphic_view (int i);
         
+        void handle_listwidget_item_signal ();
 
         
-        QMenuBar* menu_bar;
-
-        QMenu* file_menu;
-
-        QMenu* help_menu;
         
-        QAction* file_menu_new;
-
-        QAction* file_menu_save_as;
 
         QSplitter* main_splitter;
 
+
         QWidget* view_widget;
+
 
         QListWidget* list_widget;
 
+
         QPixmap pixmap;
+
 
         QImage image;
 
+
         QLabel* label;
+
 
         QListWidgetItem* item;
 
+
         QGraphicsScene* scene;
+
 
         QGraphicsView* view;
 
+
+        // using unique_ptr so we don't need delete in the end of work , when scope is end , memory is clean !
         std::unique_ptr<Document> doc;
         
+
         std::unique_ptr<Poppler::Page> page_of_pdf;
         
+
         QString filepath;
+
+
+        QStackedWidget* stack_widget;
+
+
+        QList<QGraphicsView*> views;
+
+
+        QList<QPixmap> pixmaps;
 };
 
 #endif
